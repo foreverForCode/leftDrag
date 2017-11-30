@@ -46,6 +46,7 @@
             height: 50px;
             box-sizing: border-box;
             border-bottom: 1px solid grey;
+            transition: all 300ms ease;
         }
 
         .box li:first-child {
@@ -63,7 +64,6 @@
             width: 100px;
             background-color: grey;
             color: red;
-            margin-left: 0px;
         }
     </style>
 </head>
@@ -71,7 +71,7 @@
 <body>
     <h2>向左滑动删除</h2>
     <ul class="box">
-        <li class="perli">
+        <li class="line">
             <p class="con">
                 这是内容
             </p>
@@ -79,7 +79,7 @@
                 删除
             </p>
         </li>
-        <li class="perli">
+        <li class="line">
             <p class="con">
                 这是内容
             </p>
@@ -87,7 +87,7 @@
                 删除
             </p>
         </li>
-        <li class="perli">
+        <li class="line">
             <p class="con">
                 这是内容
             </p>
@@ -95,7 +95,7 @@
                 删除
             </p>
         </li>
-        <li class="perli">
+        <li class="line">
             <p class="con">
                 这是内容
             </p>
@@ -103,7 +103,7 @@
                 删除
             </p>
         </li>
-        <li class="perli">
+        <li class="line">
             <p class="con">
                 这是内容
             </p>
@@ -116,17 +116,69 @@
 <script>
     $(function () {
         var clientWidth = $('.box')[0].offsetWidth;
-        var startX,moveX,distX,currentLeft,lastLeft;
+        var start, move, end;
 
         function setWidth() {
-            $('.perli').css('width', clientWidth + 100 + 'px');
-            $('.perli .con').css('width', clientWidth + 'px');
+            $('.line').css('width', clientWidth + 300 + 'px');
+            $('.line .con').css('width', clientWidth + 'px');
         }
-        var lines = $('.perli')||[];
-        var lens = lines.length;
-        
-       
-       
+        $('.box').on('touchstart', 'li', function (e) {
+            var that = null,
+                that = this;
+            var point = e.touches[0];
+            start = {
+                x: point.pageX,
+                y: point.pageY
+            }
+
+        });
+        $('.box').on('touchmove', 'li', function (e) {
+            var that = null,
+                that = this;
+            var point = e.touches[0];
+            move = {
+                x: point.pageX,
+                y: point.pageY
+            };
+            var diffX = move.x - start.x;
+            var diffY = move.y - start.y;
+
+            if (diffX < 0) {
+                console.log("左滑动");
+                $(that).css('transform', 'translateX(' + diffX + 'px)')
+            } else {
+                console.log("右滑动");
+                $(that).css('transform', 'translateX(' + diffX + 'px)')
+            }
+            console.log(diffX, diffY)
+
+        })
+        $('.box').on('touchmove', 'li', function (e) {
+            var that = null;
+            that = this;
+            var point = e.changedTouches[0];
+            end = {
+                x: point.pageX,
+                y: point.pageY
+            };
+            var diffX = end.x - start.x;
+
+            if (diffX < 0) {
+                if (Math.abs(diffX) > 30) {
+                    $(that).css('transform', 'translateX(-100px)')
+                } else {
+                    $(that).css('transform', 'translateX(' + 0 + 'px)')
+                }
+            }else{
+                if (Math.abs(diffX) > 30){
+                    $(that).css('transform', 'translateX(' + 0 + 'px)')
+                }
+            }
+
+        })
+
+
+
         setWidth();
     })
 </script>
