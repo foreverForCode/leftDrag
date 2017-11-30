@@ -31,9 +31,12 @@
                 var diffX = move.x - start.x;
                 var diffY = move.y - start.y;
 
+
                 if (diffX < 0) {
                     console.log("左滑动");
                     $(that).css('transform', 'translateX(' + diffX + 'px)')
+
+          
                 } else {
                     console.log("右滑动");
                     $(that).css('transform', 'translateX(' + 0 + 'px)')
