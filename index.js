@@ -51,7 +51,7 @@
             var diffX = end.x - start.x;
 
             if (diffX < 0) {
-                if (Math.abs(diffX) > 30) {
+                if (Math.abs(diffX) > 60) {
                     $(that).css('transform', 'translateX(-100px)')
                 } else {
                     $(that).css('transform', 'translateX(' + 0 + 'px)')
