@@ -14,12 +14,19 @@
                 that = this;
             curline = null;
             var point = e.touches[0];
+            $('.box li').forEach(function(item){
+                if($(item)[0].getAttribute('cur') == 'on'){
+                    $(item).css('transform', 'translateX(' + 0 + 'px)')
+                }
+                console.log($(item)[0].getAttribute('cur'));
+            })
             start = {
                 x: point.pageX,
                 y: point.pageY
             };
 
             curline = $(that);
+            curline.attr('cur','on');
             curline.on('touchmove', function (e) {
                 var that = null,
                     that = this;
