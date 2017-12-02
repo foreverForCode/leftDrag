@@ -18,7 +18,7 @@
                 x: point.pageX,
                 y: point.pageY
             };
-
+            //把当前this赋值给curline
             curline = $(that);
             curline.on('touchmove', function (e) {
                 var that = null,
@@ -31,12 +31,9 @@
                 var diffX = move.x - start.x;
                 var diffY = move.y - start.y;
 
-
                 if (diffX < 0) {
                     console.log("左滑动");
                     $(that).css('transform', 'translateX(' + diffX + 'px)')
-
-          
                 } else {
                     console.log("右滑动");
                     $(that).css('transform', 'translateX(' + 0 + 'px)')
